@@ -1,0 +1,7 @@
+for i in range(97, 123):
+    if i == 123:
+        print(chr(i))
+    else:
+        if i == 101 or i == 113:
+            continue
+        print(chr(i), end="")
