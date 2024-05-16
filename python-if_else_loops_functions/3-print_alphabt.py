@@ -6,4 +6,8 @@ for i in range(97, 123):
     else:
         if i == 101 or i == 113:
             continue
-        print(chr(i), end="")
+        else:
+            if i == 122:
+                print("{}".format(chr(i)))
+            else:
+                print("{}".format(chr(i)), end="")
