@@ -5,6 +5,5 @@ import sys
 if __name__ == "__main__":
     argv = sys.argv[1:]
 
-    for argument in argv:
-        result = sum(int(argument))
+    result = sum(int(argument) for argument in argv)
         print(result)
