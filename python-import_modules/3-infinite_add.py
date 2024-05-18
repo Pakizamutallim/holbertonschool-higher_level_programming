@@ -1,7 +1,8 @@
 import sys
 
 if __name__ == "__main__":
-    argv = sys.argv
-    argc = len(argv) - 1
+    argv = sys.argv[1:]
 
-    for
+    for argument in argv:
+        result = sum(int(argument))
+        print(result)
