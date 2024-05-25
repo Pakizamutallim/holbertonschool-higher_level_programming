@@ -2,6 +2,6 @@
 
 def uniq_add(my_list=[]):
     unique = []
-    for i in my_list:
-        unique = set(my_list)
+    for i in set(my_list):
+        unique += i
     return (unique)
