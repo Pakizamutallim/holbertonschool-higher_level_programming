@@ -29,6 +29,7 @@ class Square:
 
     @property
     def position(self):
+        """Get/set the current position of the square."""
         return (self.__position)
 
     @position.setter                                                                                                                          def position(self, value):
@@ -46,6 +47,7 @@ class Square:
         return (self.__size * self.__size)
 
     def my_print(self):
+        """Print the square with the # character."""
         if self.__size == 0:
             print("")
         else:
