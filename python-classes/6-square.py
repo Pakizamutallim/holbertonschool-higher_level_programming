@@ -5,7 +5,7 @@
 class Square:
     """Represent a square."""
 
-    def __init__(self, size=0):
+    def __init__(self, size=0, position=(0, 0)):
         """Represent the square."""
 
         if type(size) is not int:
