@@ -3,5 +3,5 @@
 """
 defines a sguare
 """
-class Sguare:
+class Square:
     pass
