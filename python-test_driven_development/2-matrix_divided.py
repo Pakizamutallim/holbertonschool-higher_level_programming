@@ -9,16 +9,16 @@ This module is composed by a function that divides the numbers of a matrix
 def matrix_divided(matrix, div):
     """
     Divides all elements of a matrix by a given divisor.
-    
+
     Parameters:
     matrix (list of lists): A matrix to be divided, must be a list of lists
     of integers or floats.
-    div (int or float): The divisor, must be a non-zero number.
-    
+    div (int or float): The divisor, must be a non-zero number
+
     Returns:
     list of lists: A new matrix with all elements divided by the divisor,
     rounded to 2 decimal places.
-    
+
     Raises:
     TypeError: If the matrix is not a list of lists of integers or floats,
     or if div is not a number.
@@ -26,7 +26,8 @@ def matrix_divided(matrix, div):
     ZeroDivisionError: If div is equal to 0.
     """
 
-    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
+    if not isinstance(matrix, list) or not
+        all(isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
     for row in matrix:
         if not all(isinstance(el, (int, float)) for el in row):
