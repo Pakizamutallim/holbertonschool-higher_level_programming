@@ -26,21 +26,14 @@ def matrix_divided(matrix, div):
     ZeroDivisionError: If div is equal to 0.
     """
 
-    if not isinstance(matrix, list):
-        raise TypeError("matrix must be a matrix (list of lists) of "
-                        "integers/floats")
+    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
+        raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
 
-    if not all(isinstance(row, list) for row in matrix):
-        raise TypeError("matrix must be a matrix (list of lists) of "
-                        "integers/floats")
+    if any(not isinstance(el, (int, float)) for row in matrix for el in row):
+        raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
 
-    for row in matrix:
-        if not all(isinstance(el, (int, float)) for el in row):
-            raise TypeError("matrix must be a matrix (list of lists) of "
-                            "integers/floats")
-
-    if len(matrix) == 0 or len(matrix[0]) == 0:
-        raise ValueError("matrix cannot be empty")
+    if len(matrix) == 0 or any(len(row) == 0 for row in matrix):
+        return []
 
     row_length = len(matrix[0])
     if not all(len(row) == row_length for row in matrix):
