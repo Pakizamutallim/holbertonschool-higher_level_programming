@@ -1,9 +1,7 @@
 #!/usr/bin/python3
-
 """
-a module that finds max integer
+Module to find the max integer
 """
-
 import unittest
 max_integer = __import__('6-max_integer').max_integer
 
@@ -22,11 +20,11 @@ class TestMaxInteger(unittest.TestCase):
         self.assertEqual(result, 12)
 
     def test_isint(self):
-        """
+        '''
         Test to check variable against integer
-        """
+        '''
         var = 1
-        self.assertTrue(max_integer([var, 2]) = 2)
+        self.assertTrue(max_integer([var, 2]) == 2)
         x = 5
         self.assertTrue(max_integer([1, x]) == x)
 
@@ -54,13 +52,11 @@ class TestMaxInteger(unittest.TestCase):
         Test only negative integers
         '''
         self.assertEqual(max_integer([-1, -2, -5]), -1)
-
     def test_no_argument(self):
         '''
         Test that None is returned if no argument
         '''
         self.assertEqual(max_integer(), None)
-
     def test_empty_list(self):
         '''
         Test if list is empty
