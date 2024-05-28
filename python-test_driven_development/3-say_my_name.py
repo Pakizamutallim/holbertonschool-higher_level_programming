@@ -11,12 +11,8 @@ def say_my_name(first_name, last_name=""):
     '''
     Python function that takes two strings and prints them
     '''
-errmsg = 'first_name must be a string'
-errmsg1 = 'last_name must be a string'
-name = 'My name is '
-
-
-def say_my_name(first_name, last_name=""):
+    errmsg = 'first_name must be a string'
+    errmsg1 = 'last_name must be a string'
     if not isinstance(first_name, str):
         raise TypeError(errmsg)
     if not isinstance(last_name, str):
