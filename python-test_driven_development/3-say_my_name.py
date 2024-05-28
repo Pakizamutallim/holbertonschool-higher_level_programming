@@ -1,21 +1,25 @@
 #!/usr/bin/python3
 
-""" File name : 3-say_my_name.py
-    Say my name: function that prints My name is <first name> <last name>
-    Prototype: def say_my_name(first_name, last_name="")
-    You are not allowed to import any module
-"""
+
+'''
+   3-say_my_name
+   Contains a function that prints names
+'''
 
 
 def say_my_name(first_name, last_name=""):
-    """Return string with full name
-    first_name and last_name must be strings
-    Raises:
-        TypeError: first_name must be a string
-        TypeError: first_name must be a string
-    """
+    '''
+    Python function that takes two strings and prints them
+    '''
+errmsg = 'first_name must be a string'
+errmsg1 = 'last_name must be a string'
+name = 'My name is '
+
+
+def say_my_name(first_name, last_name=""):
     if not isinstance(first_name, str):
-        raise TypeError("first_name must be a string")
+        raise TypeError(errmsg)
     if not isinstance(last_name, str):
-        raise TypeError("last_name must be a string")
-    print("My name is {:s} {:s}".format(first_name, last_name))
+        raise TypeError(errmsg1)
+    else:
+        print('My name is {} {}'.format(first_name, last_name))
