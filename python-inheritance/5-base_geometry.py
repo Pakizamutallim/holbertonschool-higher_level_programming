@@ -6,4 +6,5 @@
 
 
 class BaseGeometry(object):
+    """Define class base geometry"""
     pass
