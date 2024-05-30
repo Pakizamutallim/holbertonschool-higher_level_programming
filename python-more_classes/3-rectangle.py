@@ -57,10 +57,9 @@ class Rectangle(object):
             return 0
         return ((2 * self.__width) + (2 * self.__height))
 
-
     def __str__(self):
         """ string representation of square """
-        srting = ""
+        string = ""
         if self.__height == 0 or self.__width == 0:
             return ""
         wide = "#" * self.width
