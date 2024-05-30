@@ -1,9 +1,7 @@
 #!/usr/bin/python3
-
-""i"
+"""
     It is not allowed to import any module
 """
-
 Rectangle __import__('9-rectangle.py').Rectangle
 
 
