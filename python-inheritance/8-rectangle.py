@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """ File name : 8-rectangle.py
     It is not allowed to import any module
 """
@@ -15,8 +14,9 @@ class Rectangle(BaseGeometry):
     width  {int} -- [Rectangle's width]
     height {int} -- [Rectangle's height]
     """
+
     def __init__(self, width, height):
-         """
+        """
         private attributes width and height,
         and validating if they are ints.
         """
