@@ -5,5 +5,5 @@
 """
 
 
-class BaseGeometry(obj):
+class BaseGeometry(object):
     pass
