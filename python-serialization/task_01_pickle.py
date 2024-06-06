@@ -1,4 +1,7 @@
 import pickle
+"""
+Serialize a Python dictionary to an XML file.
+"""
 
 
 class CustomObject:
