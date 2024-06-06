@@ -2,6 +2,10 @@ import pickle
 
 
 class CustomObject:
+    """
+    Serialize a Python dictionary to an XML file.
+    """
+
     def __init__(self, name, age, is_student):
         self.name = name
         self.age = age
