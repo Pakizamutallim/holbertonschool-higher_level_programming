@@ -3,14 +3,18 @@ import json
 from urllib.parse import urlparse
 
 class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
+
     def do_GET(self):
+        # Parse the URL path
         parsed_path = urlparse(self.path)
         path = parsed_path.path
 
+        # Default response
         response_code = 200
         response_data = "Hello, this is a simple API!"
         content_type = "text/plain"
 
+        # Handle different endpoints
         if path == "/":
             response_data = "Hello, this is a simple API!"
         elif path == "/data":
@@ -24,7 +28,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             response_data = json.dumps({"error": "Endpoint not found"})
             content_type = "application/json"
 
-
+        # Send response status code
         self.send_response(response_code)
 
         # Send headers
@@ -34,8 +38,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         # Send response data
         self.wfile.write(response_data.encode())
 
-
-
+# Run the server on port 8000
 def run(server_class=http.server.HTTPServer, handler_class=SimpleHTTPRequestHandler):
     server_address = ('', 8000)
     httpd = server_class(server_address, handler_class)
