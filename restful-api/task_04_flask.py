@@ -1,48 +1,49 @@
+#!/usr/bin/python3
+"""Module containing simple Flask web application"""
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
+users = {}
 
-# In-memory storage for users
-users = {
-    "jane": {"username": "jane", "name": "Jane", "age": 28, "city": "Los Angeles"},
-    "john": {"username": "john", "name": "John", "age": 30, "city": "New York"}
-}
 
-# Define the root URL
 @app.route('/')
 def home():
-    return "Welcome to the Flask API!"
+    return 'Welcome to the Flask API!'
 
-# Endpoint to return all usernames
-@app.route('/data', methods=['GET'])
-def get_data():
-    usernames = list(users.keys())
-    return jsonify(usernames)
 
-# Endpoint to return API status
-@app.route('/status', methods=['GET'])
-def get_status():
-    return jsonify({"status": "OK"})
+@app.route('/data')
+def data():
+    return jsonify(list(users))
 
-# Endpoint to return user data based on username
-@app.route('/users/<username>', methods=['GET'])
-def get_user(username):
-    user = users.get(username)
-    if user:
-        return jsonify(user)
-    else:
-        return jsonify({"error": "User not found"}), 404
 
-# Endpoint to add a new user
 @app.route('/add_user', methods=['POST'])
 def add_user():
-    new_user = request.json
-    username = new_user.get("username")
-    if username and username not in users:
-        users[username] = new_user
-        return jsonify({"message": "User added", "user": new_user}), 201
-    else:
-        return jsonify({"error": "Username already exists or invalid data"}), 400
+    data = request.json
+    if data is None or data.get('username') is None:
+        return jsonify({'error': 'Username is required'}), 400
+    user = {
+        'username': data.get('username'),
+        'name': data.get('name'),
+        'age': data.get('age'),
+        'city': data.get('city')
+    }
+    users[user.get('username')] = user
+    return jsonify({'message': 'User added', 'user': user}), 201
+
+
+@app.route('/status')
+def status():
+    return 'OK'
+
+
+@app.route('/users/<username>')
+def username(username):
+    if username is None:
+        return jsonify({'error': 'Username is required'}), 400
+    if username not in users:
+        return jsonify({"error": "User not found"}), 404
+    return jsonify(users[username])
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
