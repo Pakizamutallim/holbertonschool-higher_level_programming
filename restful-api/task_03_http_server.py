@@ -1,49 +1,39 @@
 import http.server
 import json
-from urllib.parse import urlparse
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
-class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
-
+class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        # Parse the URL path
-        parsed_path = urlparse(self.path)
-        path = parsed_path.path
-
-        # Default response
-        response_code = 200
-        response_data = "Hello, this is a simple API!"
-        content_type = "text/plain"
-
-        # Handle different endpoints
-        if path == "/":
-            response_data = "Hello, this is a simple API!"
-        elif path == "/data":
-            response_data = json.dumps({"name": "John", "age": 30, "city": "New York"})
-            content_type = "application/json"
-        elif path == "/status":
-            response_data = json.dumps({"status": "OK"})
-            content_type = "application/json"
+        if self.path == '/':
+            self.send_response(200)
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
+            self.wfile.write(b"Hello, this is a simple API!")
+        elif self.path == '/data':
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            data = {"name": "John", "age": 30, "city": "New York"}
+            self.wfile.write(json.dumps(data).encode())
+        elif self.path == '/status':
+            self.send_response(200)
+            self.send_header("Content-type", "text/plain")
+            self.end_headers()
+            self.wfile.write(b"OK")
         else:
-            response_code = 404
-            response_data = json.dumps({"error": "Endpoint not found"})
-            content_type = "application/json"
+            self.send_response(404)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            error_message = {
+                "error": "Endpoint not found"
+            }
+            self.wfile.write(json.dumps(error_message).encode())
 
-        # Send response status code
-        self.send_response(response_code)
-
-        # Send headers
-        self.send_header("Content-type", content_type)
-        self.end_headers()
-
-        # Send response data
-        self.wfile.write(response_data.encode())
-
-# Run the server on port 8000
-def run(server_class=http.server.HTTPServer, handler_class=SimpleHTTPRequestHandler):
-    server_address = ('', 8000)
+def run(server_class=HTTPServer, handler_class=SimpleHTTPRequestHandler, port=8000):
+    server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print('Starting httpd server on port 8000...')
+    print(f'Starting httpd server on port {port}')
     httpd.serve_forever()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     run()
