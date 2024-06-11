@@ -1,17 +1,16 @@
 #!/usr/bin/python3
-
-
+"""Module for secure API"""
 from flask import Flask, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_httpauth import HTTPBasicAuth
 from flask_jwt_extended import (JWTManager, create_access_token,
                                 jwt_required, get_jwt_identity)
 
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key_here'
+app.config['SECRET_KEY'] = 'superincredibleamazingsecretkey'
 auth = HTTPBasicAuth()
 jwt = JWTManager(app)
-
 
 users = {
     "user1": {
@@ -39,6 +38,20 @@ def verify_password(username, password):
 @auth.login_required
 def basic_protected():
     return "Basic Auth: Access Granted"
+
+
+@app.route("/signup", methods=["POST"])
+def signup():
+    username = request.json.get("username", None)
+    password = request.json.get("password", None)
+    if not username:
+        return jsonify({"error": "Missing username"}), 400
+    if not password:
+        return jsonify({"error": "Missing password"}), 400
+    if username in users:
+        return jsonify({"error": "User already exists"}), 400
+    users[username] = {"username": username, "password": generate_password_hash(password), "role": "user"}
+    return jsonify({"message": "User created", "user": users[username]})
 
 
 @app.route('/login', methods=['POST'])
